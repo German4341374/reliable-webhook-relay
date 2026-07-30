@@ -1,0 +1,12 @@
+.tools/
+bin/
+coverage.out
+coverage.html
+*.db
+*.db-shm
+*.db-wal
+*.log
+.env
+.DS_Store
+.idea/
+.vscode/
