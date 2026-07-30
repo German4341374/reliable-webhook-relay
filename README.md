@@ -125,7 +125,7 @@ In another terminal:
 ```bash
 export RELAY_CHANNEL_DEMO_SECRET='local-only-secret-at-least-16-chars'
 export RELAY_ALLOW_PRIVATE_TARGETS=true
-go run ./cmd/relay -config config/config.example.json
+go run ./cmd/relay -config config/config.local.example.json
 ```
 
 Do not enable `RELAY_ALLOW_PRIVATE_TARGETS` for an internet-facing deployment.
@@ -269,6 +269,10 @@ go vet ./...
 go test -race -coverprofile=coverage.out ./...
 go build ./cmd/relay ./cmd/demo-receiver ./cmd/healthcheck
 ```
+
+On Windows PowerShell, after `make build` or the equivalent three `go build`
+commands with `.exe` outputs, run `powershell -File scripts/smoke.ps1` for a
+process-level health, signing, failure, retry, and delivery check.
 
 Tests cover signature verification, header masking, SSRF validation,
 idempotency, backoff calculation, payload limits, and a full persisted

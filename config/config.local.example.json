@@ -1,0 +1,17 @@
+{
+  "listenAddress": "127.0.0.1:8080",
+  "databasePath": "relay.db",
+  "pollInterval": "500ms",
+  "baseBackoff": "1s",
+  "maxBackoff": "1m",
+  "shutdownTimeout": "10s",
+  "channels": [
+    {
+      "name": "demo",
+      "targetURL": "http://127.0.0.1:9090/webhooks",
+      "secretEnv": "RELAY_CHANNEL_DEMO_SECRET",
+      "timeout": "3s",
+      "maxAttempts": 5
+    }
+  ]
+}
