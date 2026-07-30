@@ -1,0 +1,63 @@
+name: reliable-webhook-relay
+
+services:
+  receiver:
+    build:
+      context: .
+      args:
+        VERSION: local
+    image: reliable-webhook-relay:local
+    entrypoint: ["/demo-receiver"]
+    environment:
+      DEMO_FAIL_FIRST: "1"
+      RELAY_CHANNEL_DEMO_SECRET: "${RELAY_CHANNEL_DEMO_SECRET:?copy .env.example to .env}"
+    read_only: true
+    tmpfs:
+      - /tmp:size=16m,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: [ "CMD", "/healthcheck", "http://127.0.0.1:9090/health" ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 3s
+    networks:
+      - relay
+
+  relay:
+    image: reliable-webhook-relay:local
+    depends_on:
+      receiver:
+        condition: service_healthy
+    environment:
+      RELAY_ALLOW_PRIVATE_TARGETS: "true"
+      RELAY_CHANNEL_DEMO_SECRET: "${RELAY_CHANNEL_DEMO_SECRET:?copy .env.example to .env}"
+    ports:
+      - "8080:8080"
+    volumes:
+      - relay_data:/data
+    read_only: true
+    tmpfs:
+      - /tmp:size=16m,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: [ "CMD", "/healthcheck", "http://127.0.0.1:8080/health" ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    networks:
+      - relay
+
+volumes:
+  relay_data:
+
+networks:
+  relay:
+    internal: true

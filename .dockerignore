@@ -1,0 +1,10 @@
+.git
+.github
+.tools
+bin
+coverage.*
+*.db
+*.db-shm
+*.db-wal
+*.log
+.env
