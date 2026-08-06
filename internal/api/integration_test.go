@@ -19,7 +19,7 @@ import (
 	"github.com/German4341374/reliable-webhook-relay/internal/worker"
 )
 
-const testSecret = "integration-test-secret-32-characters"
+const testSecret = "integration-test-secret-32-characters" // gitleaks:allow -- test fixture
 
 func TestRelayPersistsRetriesAndDelivers(t *testing.T) {
 	var receiverAttempts atomic.Int32
