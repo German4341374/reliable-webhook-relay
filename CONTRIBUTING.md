@@ -3,7 +3,7 @@
 ## Development workflow
 
 1. Fork the repository and create a focused branch.
-2. Install Go 1.26.5 and run `make setup`.
+2. Install Go 1.26.6 and run `make setup`.
 3. Add tests for behavior changes.
 4. Run `make lint`, `make test`, and `make build`.
 5. Open a pull request using the repository template.
