@@ -1,14 +1,14 @@
 # Reliable Webhook Relay
 
 [![CI](https://github.com/German4341374/reliable-webhook-relay/actions/workflows/ci.yml/badge.svg)](https://github.com/German4341374/reliable-webhook-relay/actions/workflows/ci.yml)
-[![Go](https://img.shields.io/badge/Go-1.26.5-00ADD8?logo=go)](https://go.dev/)
+[![Go](https://img.shields.io/badge/Go-1.26.6-00ADD8?logo=go)](https://go.dev/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 A compact webhook relay that authenticates incoming events, persists them
 before dispatch, and delivers them to a configured HTTP endpoint with bounded
-retries. It demonstrates durable background processing, at-least-once delivery,
-idempotency, SSRF protection, observable failure states, and secure container
-defaults without introducing a distributed queue.
+retries. The design keeps durable background processing, at-least-once delivery,
+idempotency and outbound-request safety visible without introducing a distributed
+queue.
 
 ## Features
 
@@ -59,7 +59,7 @@ The delivery is stored before the API acknowledges it. Delivery is
 
 ## Technology
 
-- Go 1.26.5 and the standard `net/http`, `log/slog`, and crypto packages
+- Go 1.26.6 and the standard `net/http`, `log/slog`, and crypto packages
 - SQLite through the pure-Go `modernc.org/sqlite` driver
 - Docker Compose for the relay, fake receiver, network, and named volume
 - GitHub Actions for format, vet, race tests, builds, and Trivy image scanning
@@ -109,7 +109,7 @@ want to delete the named volume and all local delivery data.
 
 ## Run with Go
 
-Install Go 1.26.5, then start any local target you control. Loopback targets
+Install Go 1.26.6, then start any local target you control. Loopback targets
 are blocked by default, so the development override is required for a local
 receiver:
 
@@ -307,7 +307,7 @@ response, then inspect structured logs.
 - Authentication, TLS termination, per-client rate limiting, and retention
   cleanup are deployment responsibilities.
 
-## Future improvements
+## Possible next steps
 
 - Separate inbound and outbound channel secrets
 - Add configurable payload retention and secure deletion

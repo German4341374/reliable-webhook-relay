@@ -8,7 +8,7 @@ proof of concept against a live service.
 
 ## Supported version
 
-The latest commit on `main` is supported. This portfolio project does not
+The latest commit on `main` is supported. This repository does not
 promise long-term maintenance for older commits.
 
 ## Deployment baseline
