@@ -6,9 +6,9 @@
 
 A compact webhook relay that authenticates incoming events, persists them
 before dispatch, and delivers them to a configured HTTP endpoint with bounded
-retries. It demonstrates durable background processing, at-least-once delivery,
-idempotency, SSRF protection, observable failure states, and secure container
-defaults without introducing a distributed queue.
+retries. The design keeps durable background processing, at-least-once delivery,
+idempotency and outbound-request safety visible without introducing a distributed
+queue.
 
 ## Features
 
@@ -307,7 +307,7 @@ response, then inspect structured logs.
 - Authentication, TLS termination, per-client rate limiting, and retention
   cleanup are deployment responsibilities.
 
-## Future improvements
+## Possible next steps
 
 - Separate inbound and outbound channel secrets
 - Add configurable payload retention and secure deletion
