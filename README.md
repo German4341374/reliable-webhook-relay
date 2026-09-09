@@ -4,11 +4,12 @@
 [![Go](https://img.shields.io/badge/Go-1.26.6-00ADD8?logo=go)](https://go.dev/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-A compact webhook relay that authenticates incoming events, persists them
-before dispatch, and delivers them to a configured HTTP endpoint with bounded
-retries. The design keeps durable background processing, at-least-once delivery,
-idempotency and outbound-request safety visible without introducing a distributed
-queue.
+Receive a signed webhook and forward it to another HTTP endpoint.
+The relay saves the event in SQLite before sending it, so pending work can survive a restart.
+If delivery fails, it retries up to the configured limit.
+
+You can inspect deliveries and retry them through the API. No separate message broker is
+needed, and receivers should still expect that a delivery may arrive more than once.
 
 ## Features
 
